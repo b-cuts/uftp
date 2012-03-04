@@ -1,0 +1,8 @@
+# compiled source
+*.o
+
+# generated binaries
+uftp
+uftp_keymgt
+uftpd
+uftpproxyd
