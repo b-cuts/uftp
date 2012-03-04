@@ -1,6 +1,11 @@
 # compiled source
 *.o
 
+# archives
+*.tar
+*.tar.gz
+*.zip
+
 # generated binaries
 uftp
 uftp_keymgt
