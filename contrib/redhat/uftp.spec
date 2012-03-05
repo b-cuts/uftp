@@ -1,7 +1,7 @@
 Name:		uftp
 Version:	3.6.1
 Release:	1%{?dist}
-Summary:	Encrypted UDP based FTP with multicast	
+Summary:	Encrypted UDP based FTP metapackage
 
 Group:		System Environment/Daemons
 License:	GPL
@@ -28,6 +28,33 @@ receivers. UFTP has been used in the production process of The Wall Street
 Journal to send WSJ pages over satellite to their remote printing plants, and 
 other users have used it to send to over 1000 receivers.
 
+%package -n %{name}d
+Summary:	Encrypted UPD based FTP daemon with multicast
+Group:		System Environment/Daemons
+Requires:	openssl
+
+%description -n %{name}d
+Provides the program uftpd.  This package is the UFTP receiver.
+
+%package proxy
+Summary:	Encrypted UDP based FTP proxy with multicast
+Group:		System Environment/Daemons
+Requires:	openssl
+
+%description proxy
+Provides the program uftpproxyd.  This package provides proxy support for 
+the UFTP receiver.
+
+%package utils
+Summary:	Encrypted UDP based FTP encryption key management
+Group:		System Environment/Daemons
+Requires:	openssl
+
+%description utils
+Provides the programs uftp_keymgt.  This package provides the utility
+for encryption key management.
+
+
 %prep
 %setup -q
 #make the install more redhat like
@@ -50,9 +77,26 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc Changes.txt LICENSE.txt ReadMe.txt
-%{_bindir}/uftp*
-%{_sbindir}/uftp*
-%{_mandir}/man1/*
+%{_bindir}/uftp
+%{_mandir}/man1/uftp.1.gz
+
+%files -n %{name}d
+%defattr(-,root,root,-)
+%doc Changes.txt LICENSE.txt ReadMe.txt
+%{_sbindir}/uftpd
+%{_mandir}/man1/uftpd.1.gz
+
+%files proxy
+%defattr(-,root,root,-)
+%doc Changes.txt LICENSE.txt ReadMe.txt
+%{_sbindir}/uftpproxyd
+%{_mandir}/man1/uftpproxyd.1.gz
+
+%files utils
+%defattr(-,root,root,-)
+%doc Changes.txt LICENSE.txt ReadMe.txt
+%{_bindir}/uftp_keymgt
+%{_mandir}/man1/uftp_keymgt.1.gz
 
 
 %changelog
